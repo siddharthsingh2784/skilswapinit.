@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SKILL//SWAP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar__inner">
+            <a href="#" class="brand">SKILL<span class="brand__slash">//</span>SWAP</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="#signup">Post a swap</a>
+                <a href="#admin" class="nav__admin">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero" id="top" data-theme="hero">
+            <div class="wrap hero__grid">
+                <div class="hero__lead">
+                    <h1 class="d-xl">Exchange skills.<br />Expand <em>horizons.</em></h1>
+                    <p class="hero__line">Post what you can teach. Find what you want to learn. Swap with someone whose
+                        list mirrors yours.</p>
+                    <a href="#signup" class="btn btn--primary">Post your swap <span aria-hidden="true">→</span></a>
+                </div>
+
+                <aside class="search" aria-label="Find a swap">
+                    <div class="search__head">
+                        <span class="mono-label">Find your swap</span>
+                        <span class="mono-label search__count" id="search-count" data-active="false">—</span>
+                    </div>
+                    <hr class="perf" />
+                    <form class="search__body" id="search-form" novalidate>
+                        <div class="search__fields">
+                            <label class="search__field">
+                                <span class="mono-label">I can teach</span>
+                                <input type="text" id="search-give" placeholder="Figma wireframing"
+                                    autocomplete="off" />
+                            </label>
+                            <div class="search__arrow" aria-hidden="true">⇄</div>
+                            <label class="search__field">
+                                <span class="mono-label">I want to learn</span>
+                                <input type="text" id="search-take" placeholder="React basics" autocomplete="off" />
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">Find matches <span
+                                aria-hidden="true">→</span></button>
+                    </form>
+                    <hr class="perf" />
+                    <div class="search__foot">
+                        <span class="mono-label">Matches filter the board &amp; deck</span>
+                        <button type="button" class="link-arrow" id="search-clear" hidden>Clear</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section" id="signup" data-theme="signup">
+            <div class="wrap signup__grid">
+                <div>
+                    <h2 class="d-l">Post your swap.</h2>
+                </div>
+
+                <form class="form" id="swap-form" novalidate>
+                    <div class="form__row">
+                        <label class="field" for="f-name">
+                            <span class="mono-label">Your name</span>
+                            <input id="f-name" type="text" name="name" required minlength="2" autocomplete="name"
+                                placeholder="Aarav Shah" />
+                        </label>
+                    </div>
+                    <div class="form__row">
+                        <label class="field" for="f-email">
+                            <span class="mono-label">Email</span>
+                            <input id="f-email" type="email" name="email" required autocomplete="email"
+                                placeholder="you@college.edu" />
+                        </label>
+                    </div>
+                    <div class="form__row form__row--split">
+                        <label class="field" for="f-offers">
+                            <span class="mono-label">Skill you'll teach</span>
+                            <input id="f-offers" type="text" name="offers" required placeholder="Figma wireframing" />
+                        </label>
+                        <label class="field" for="f-wants">
+                            <span class="mono-label">Skill you want</span>
+                            <input id="f-wants" type="text" name="wants" required placeholder="React basics" />
+                        </label>
+                    </div>
+                    <div class="form__row form__row--split">
+                        <label class="field" for="f-photo">
+                            <span class="mono-label">Profile pic URL <span class="opt">(optional)</span></span>
+                            <input id="f-photo" type="url" name="photoURL" placeholder="https://…/me.jpg" />
+                        </label>
+                        <label class="field" for="f-bg">
+                            <span class="mono-label">Card background URL <span class="opt">(optional)</span></span>
+                            <input id="f-bg" type="url" name="bgURL" placeholder="https://…/texture.jpg" />
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full" id="swap-submit">Post my swap <span
+                            aria-hidden="true">→</span></button>
+                    <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+        <section class="section" id="board" data-theme="board">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 class="d-l">Board.</h2>
+                </div>
+                <div class="board-note" id="board-note" hidden>
+                    <span id="board-note-text"></span>
+                    <button type="button" class="link-arrow" id="board-note-clear">Clear</button>
+                </div>
+                <ul class="feed__list" id="feed-list">
+                    <li class="feed__empty">Loading…</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="deck" data-theme="deck">
+            <div class="wrap deck-grid">
+                <div>
+                    <h2 class="d-l">Swipe the deck.</h2>
+                    <p class="deck-hint mono-label">← skip · → swap · ↑ save · ⌫ undo</p>
+                </div>
+
+                <div>
+                    <div class="deck-stack" id="deck-stack"></div>
+                    <div class="deck-empty" id="deck-empty" hidden>
+                        <p id="deck-empty-text">No swaps in the database yet. Post one above to start the loop.</p>
+                    </div>
+
+                    <div class="deck-foot">
+                        <button type="button" class="btn btn--ghost" id="deck-undo" disabled>↶ Undo</button>
+                        <span class="mono-label"><span id="deck-remaining">0</span> in rotation</span>
+                    </div>
+
+                    <div class="deck-actions">
+                        <button type="button" class="deck-action" id="deck-skip" aria-label="Skip">← Skip</button>
+                        <button type="button" class="deck-action" id="deck-save" aria-label="Save">↑ Save</button>
+                        <button type="button" class="deck-action deck-action--swap" id="deck-swap"
+                            aria-label="Swap">Swap →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section admin" id="admin">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 class="d-l">Admin.</h2>
+                </div>
+
+                <div id="admin-gate">
+                    <form class="form form--compact" id="admin-login" novalidate>
+                        <div class="form__row">
+                            <label class="field" for="admin-pass">
+                                <span class="mono-label">Passcode</span>
+                                <input id="admin-pass" type="password" autocomplete="off" required />
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">Unlock</button>
+                        <p class="form__status" id="gate-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <div id="admin-panel" hidden>
+
+                    <!-- ===== Theme: one background per section ===== -->
+                    <div class="theme-panel">
+                        <div class="theme-panel__head">
+                            <span class="mono-label">Theme · section backgrounds</span>
+                            <span class="mono-label">one URL per section</span>
+                        </div>
+                        <form id="theme-form" novalidate>
+                            <div class="theme-panel__grid">
+                                <label class="field" for="theme-hero">
+                                    <span class="mono-label">Hero background URL</span>
+                                    <input id="theme-hero" type="url" name="heroURL" placeholder="https://…/hero.jpg"
+                                        autocomplete="off" />
+                                    <div class="theme-preview" id="theme-preview-hero" aria-hidden="true"></div>
+                                </label>
+                                <label class="field" for="theme-signup">
+                                    <span class="mono-label">Post-your-swap background URL</span>
+                                    <input id="theme-signup" type="url" name="signupURL"
+                                        placeholder="https://…/signup.jpg" autocomplete="off" />
+                                    <div class="theme-preview" id="theme-preview-signup" aria-hidden="true"></div>
+                                </label>
+                                <label class="field" for="theme-board">
+                                    <span class="mono-label">Board background URL</span>
+                                    <input id="theme-board" type="url" name="boardURL" placeholder="https://…/board.jpg"
+                                        autocomplete="off" />
+                                    <div class="theme-preview" id="theme-preview-board" aria-hidden="true"></div>
+                                </label>
+                                <label class="field" for="theme-deck">
+                                    <span class="mono-label">Deck background URL</span>
+                                    <input id="theme-deck" type="url" name="deckURL" placeholder="https://…/deck.jpg"
+                                        autocomplete="off" />
+                                    <div class="theme-preview" id="theme-preview-deck" aria-hidden="true"></div>
+                                </label>
+                            </div>
+                            <div class="theme-form__actions">
+                                <button type="submit" class="btn btn--primary" id="theme-save">Save theme</button>
+                                <button type="button" class="btn btn--ghost" id="theme-reset">Reset to default</button>
+                            </div>
+                            <p class="form__status" id="theme-status" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+
+                    <div class="admin__bar">
+                        <p class="mono-label"><span id="admin-count">0</span> swaps</p>
+                        <button type="button" class="btn btn--ghost" id="admin-lock">Lock</button>
+                    </div>
+                    <ul class="admin__list" id="admin-list"></ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <p class="brand">SKILL<span class="brand__slash">//</span>SWAP</p>
+            <p class="mono-label">A peer-to-peer learning ledger</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
