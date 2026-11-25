@@ -60,7 +60,6 @@ a {
     isolation: isolate;
 }
 
-/* CHANGED: filter + mask-image hata diye — background pic ab bilkul crisp hai */
 .hero::before,
 .section::before {
     content: '';
@@ -81,7 +80,23 @@ a {
     opacity: 1;
 }
 
-/* CHANGED: .hero::after / .section::after (paper gradient overlay) poori tarah DELETE */
+/* CHANGED: 10% paper wash overlay — subtle, photo stays 90% crisp */
+.hero::after,
+.section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(244, 239, 230, 0.10);
+    opacity: 0;
+    transition: opacity 900ms var(--ease);
+    pointer-events: none;
+}
+
+.hero.has-bg::after,
+.section.has-bg::after {
+    opacity: 1;
+}
 
 .section.has-bg {
     border-top-color: transparent;
@@ -110,8 +125,6 @@ a {
     letter-spacing: -0.02em;
     margin: 0;
 }
-
-/* CHANGED: text-shadow glow DELETE */
 
 .mono-label {
     font-family: var(--font-mono);
